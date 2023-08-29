@@ -16,6 +16,10 @@ class Article extends Model
         'author_id',
     ];
 
+    protected $casts = [
+        'comment_count' => 'integer', // Cast the comment_count attribute to an integer
+    ];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
