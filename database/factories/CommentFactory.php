@@ -32,6 +32,7 @@ class CommentFactory extends Factory
             },
             'content' => $this->faker->paragraph,
             'withfile' => $this->faker->imageUrl,
+            'upvotes' => $this->faker->numberBetween(0, 250),
         ];
     }
 }

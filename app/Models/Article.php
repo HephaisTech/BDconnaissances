@@ -29,4 +29,11 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function commentCount()
+    {
+        return $this->hasMany(Comment::class)
+            ->selectRaw('article_id, count(*) as count')
+            ->groupBy('article_id');
+    }
 }

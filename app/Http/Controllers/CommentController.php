@@ -176,4 +176,30 @@ class CommentController extends Controller
             return response()->json(['message' => 'failed', 'errors' => $th->getMessage()], 500);
         }
     }
+
+    public function upvote(Request $request)
+    {
+        try {
+            $comment = Comment::findOrFail($request->id);
+
+            $user = auth()->user();
+
+            // Check if the user has already upvoted the comment
+            if ($comment->upvoters->contains($user)) {
+                // User has already upvoted, so remove the upvote
+                $comment->upvoters()->detach($user);
+                $comment->decrement('upvotes');
+                $message = 'Comment upvote removed.';
+            } else {
+                // User hasn't upvoted, so add an upvote
+                $comment->upvoters()->attach($user);
+                $comment->increment('upvotes');
+                $message = 'Comment upvoted.';
+            }
+
+            return response()->json(['message' => $message, 'upvotes' => $comment->upvotes]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'failed', 'errors' => $th->getMessage()], 500);
+        }
+    }
 }
