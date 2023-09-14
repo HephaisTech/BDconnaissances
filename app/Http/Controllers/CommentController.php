@@ -94,7 +94,20 @@ class CommentController extends Controller
             return response()->json(['message' => 'failed', 'errors' => $th->getMessage()], 500);
         }
     }
-
+    /**
+     * Récupère les commentaires d'un article spécifique.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getCommentsByArticle($id)
+    {
+        try {
+            $comments = Comment::where('article_id', $id)->orderBy('created_at', 'desc')->get();
+            return response()->json(['data' => $comments], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'failed', 'errors' => $th->getMessage()], 500);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *

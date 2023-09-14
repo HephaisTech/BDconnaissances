@@ -89,16 +89,18 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         // Example route for getting all tags
         Route::get('/', [CommentController::class, 'index']);
 
-        // Example route for creating a new article
+        // Example route for creating a new comments
         Route::post('/', [CommentController::class, 'store']);
 
-        // Example route for getting a specific article
+        // Example route for getting a specific comments
         Route::get('{id}', [CommentController::class, 'show']);
 
-        // Example route for updating an article
+        Route::get('/article/{id}', [CommentController::class, 'getCommentsByArticle']);
+
+        // Example route for updating an comments
         Route::put('/', [CommentController::class, 'update']);
 
-        // Example route for deleting an article
+        // Example route for deleting an comments
         Route::delete('/', [CommentController::class, 'destroy']);
     });
 });
