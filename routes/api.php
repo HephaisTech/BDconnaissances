@@ -96,6 +96,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('{id}', [CommentController::class, 'show']);
 
         Route::get('/article/{id}', [CommentController::class, 'getCommentsByArticle']);
+        // 
+        Route::get('/responses/{id}', [CommentController::class, 'getCommentResponses']);
 
         // Example route for updating an comments
         Route::put('/', [CommentController::class, 'update']);

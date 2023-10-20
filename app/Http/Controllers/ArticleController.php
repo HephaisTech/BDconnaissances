@@ -13,7 +13,7 @@ class ArticleController extends Controller
     {
         try {
             // Retrieve a list of articles
-            $articles = Article::withCount('comments as comment_count')->orderBy('id', 'desc')->get();
+            $articles = Article::withCount('comments as comment_count')->with('tags')->orderBy('id', 'desc')->get();
 
             // You can return the list of articles as a JSON response
             return response()->json(['data' => $articles]);

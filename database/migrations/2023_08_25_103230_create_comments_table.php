@@ -21,7 +21,9 @@ class CreateCommentsTable extends Migration
             $table->text('withfile')->nullable();
             $table->unsignedInteger('upvotes')->default(0);
             $table->timestamps();
-
+            //
+            $table->unsignedBigInteger('parent_id')->nullable();
+            //
             $table->foreign('article_id')->references('id')->on('articles');
             $table->foreign('author_id')->references('id')->on('users');
         });

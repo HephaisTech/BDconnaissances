@@ -15,6 +15,10 @@ class Comment extends Model
         return $this->belongsTo(Article::class);
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
