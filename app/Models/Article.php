@@ -40,4 +40,9 @@ class Article extends Model
             ->selectRaw('article_id, count(*) as count')
             ->groupBy('article_id');
     }
+
+    public function steps()
+    {
+        return $this->hasMany(Step::class, 'article_id');
+    }
 }
